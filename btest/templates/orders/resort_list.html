@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список курортов и отелей</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #0066cc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0066cc;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .hotel-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .hotel-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Список курортов и отелей</h1>
+
+    {% if hotels %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Страна</th>
+                <th>Город</th>
+                <th>Отель</th>
+                <th>Количество звезд отеля</th>
+                <th>Информация о пляже</th>
+                <th>Расстояние до аэропорта</th>
+                
+            </tr>
+            {% for hotel in hotels %}
+                <tr>
+                    <td>{{ hotel.id }}</td>
+                    <td>{{ hotel.resort.country.name }}</td>
+                    <td>{{ hotel.resort.name}}</td>
+                    <td>{{ hotel.name }}</td>
+                    <td>{{ hotel.star_rating }}</td>
+                    <td>{{ hotel.beach_info }}</td>
+                    <td>{{ hotel.distance_from_airport}}</td>
+            
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Нет доступных курортов.</p>
+    {% endif %}
+
+
+<p>Перейти к списку заказанных туров: <a href="http://localhost:8000/btest/tours/">Туры</a></p>
+<p>Перейти к начальной странице: <a href="http://localhost:8000/">Назад</a></p>
+
+</div>
+
+</body>
+</html>

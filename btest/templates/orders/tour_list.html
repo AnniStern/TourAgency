@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список заказанных туров</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #0066cc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0066cc;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Список заказанных туров</h1>
+
+    {% if tours %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Страна</th>
+                <th>Город</th>
+                <th>Отель</th>
+                <th>Количество звезд отеля</th>
+                <th>Цена в рублях</th>
+                <th>Дата начала</th>
+                <th>Дата окончания</th>
+                <th>ФИО клиента</th>
+                
+            </tr>
+            {% for tour in tours %}
+                <tr>
+                    <td>{{ tour.id }}</td>
+                    <td>{{ tour.hotel.resort.country.name}}</td>
+                    <td>{{ tour.hotel.resort.name }}</td>
+                    <td>{{ tour.hotel.name }}</td>
+                    <td>{{ tour.hotel.star_rating }}</td>
+                    <td>{{ tour.price }}</td>
+                    <td>{{ tour.departure_date }}</td>
+                    <td>{{ tour.return_date }}</td>
+                    <td>{{ tour.tourist.name }}</td> 
+                    
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Нет заказанных туров.</p>
+    {% endif %}
+    
+<p>Перейти к списку курортов: <a href="http://localhost:8000/btest/resorts/">Курорты</a></p>
+<p>Перейти к начальной странице: <a href="http://localhost:8000/">Назад</a></p>
+
+</div>
+
+
+</body>
+
+
+</html>
