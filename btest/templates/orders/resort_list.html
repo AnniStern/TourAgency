@@ -40,10 +40,6 @@
             color: #fff;
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
         .hotel-list {
             list-style-type: none;
             padding: 0;
@@ -62,8 +58,6 @@
     {% if hotels %}
         <table>
             <tr>
-                <th>ID</th>
-                <th>Страна</th>
                 <th>Город</th>
                 <th>Отель</th>
                 <th>Количество звезд отеля</th>
@@ -71,17 +65,19 @@
                 <th>Расстояние до аэропорта</th>
                 
             </tr>
-            {% for hotel in hotels %}
+            {% for resort, resort_hotels in hotels %}
+            {% for hotel in resort_hotels %}
                 <tr>
-                    <td>{{ hotel.id }}</td>
-                    <td>{{ hotel.resort.country.name }}</td>
-                    <td>{{ hotel.resort.name}}</td>
+                    {% if forloop.first %}
+                        <td rowspan="{{ resort_hotels|length }}">{{ resort }}</td>
+                    {% endif %}
                     <td>{{ hotel.name }}</td>
                     <td>{{ hotel.star_rating }}</td>
                     <td>{{ hotel.beach_info }}</td>
                     <td>{{ hotel.distance_from_airport}}</td>
             
-            {% endfor %}
+                    {% endfor %}
+                {% endfor %}
         </table>
     {% else %}
         <p>Нет доступных курортов.</p>
